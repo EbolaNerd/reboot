@@ -19,11 +19,14 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('coffees')
 @Controller('coffees')
 export class CoffeesController {
   constructor(private readonly coffeeService: CoffeesService) {}
 
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @Public()
   @UsePipes(ValidationPipe)
   @Get()
